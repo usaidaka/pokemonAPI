@@ -55,18 +55,23 @@ const catchPokemonList = async (name) => {
 
   // SEQUENCE FIBONACI YANG ADA DI JSON
 
-  const fiboCaughtAsMany = caughtPokeByName.length;
+  let fiboCaughtAsMany = caughtPokeByName.length;
   const actualCaughtAsMany = filteredPokeByName.length;
 
   let fiboCount = await fibonacci(actualCaughtAsMany);
 
   let nickName = "";
 
+  console.log(filteredPokeByName[0].nickname, "filteredPokeByName");
+
   if (actualCaughtAsMany === 1) {
     nickName = `${caught.name}-0`;
   } else if (!fiboCaughtAsMany && actualCaughtAsMany <= 1) {
     nickName = caught.name;
   } else {
+    if (!filteredPokeByName[0].nickname.includes(caught)) {
+      fiboCaughtAsMany += 1;
+    }
     fiboCount = await fibonacci(fiboCaughtAsMany);
     nickName = `${caught.name}-${fiboCount}`;
   }
@@ -162,8 +167,13 @@ const renamePokemonList = async (id, nickname) => {
       poke.nickname?.includes(nickname)
     );
     filteredPokeByName = filteredPokeByName.map((poke) => poke.nickname);
-    const fiboCount = await fibonacci(filteredPokeByName.length);
-    nickName = `${nickname}-${fiboCount}`;
+    console.log(filteredPokeByName.length, "filteredPokeByName");
+    if (filteredPokeByName.length === 1) {
+      nickName = `${nickname}-0`;
+    } else {
+      const fiboCount = await fibonacci(filteredPokeByName.length);
+      nickName = `${nickname}-${fiboCount}`;
+    }
   }
 
   let editDataDB = getDataDB.map((poke) => {

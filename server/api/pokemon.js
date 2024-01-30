@@ -6,7 +6,6 @@ const GeneralHelper = require("../helpers/generalHelper");
 
 const fileName = "server/api/pokemon.js";
 
-// 1. Create rest api to get pokemon list (https://pokeapi.co/)
 const fetchList = async (request, reply) => {
   try {
     Validation.pokemonListValidation(request.query);
@@ -20,7 +19,6 @@ const fetchList = async (request, reply) => {
   }
 };
 
-// 2. Create rest api to get pokemon detail
 const fetchPokemonDetail = async (request, reply) => {
   try {
     Validation.pokemonListValidation(request.query);
@@ -50,7 +48,6 @@ const catchPokemon = async (request, reply) => {
 const releasePokemon = async (request, reply) => {
   try {
     const { id } = request.params;
-    console.log(id, "<<< ID PARAMS");
 
     const response = await PokemonHelper.releasePokemonList(id);
     return reply.json(response);
@@ -64,8 +61,6 @@ const renamePokemon = async (request, reply) => {
   try {
     const { id } = request.params;
     const { nickname } = request.body;
-    console.log(id, "<<< id PARAMS");
-    console.log(nickname, "<<< nickname PARAMS");
 
     const response = await PokemonHelper.renamePokemonList(id, nickname);
 
