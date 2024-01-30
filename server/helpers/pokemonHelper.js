@@ -1,5 +1,6 @@
 const { default: axios } = require("axios");
 const fs = require("fs");
+const _ = require("lodash");
 const { isPrime, fibonacci } = require("../../utils");
 
 const dirFile = `${__dirname}/../../assets/pokemon.json`;
@@ -53,7 +54,32 @@ const catchPokemonList = async (name) => {
     poke.nickname?.includes("-")
   );
 
-  // SEQUENCE FIBONACI YANG ADA DI JSON
+  let sequenceFiboByName = filteredPokeByName.map(
+    (x) => x.nickname.split("-")[1]
+  );
+
+  sequenceFiboByName = sequenceFiboByName.filter((x) => x !== undefined);
+  sequenceFiboByName = sequenceFiboByName.map((x) => Number(x));
+  sequenceFiboByName = _.sortBy(sequenceFiboByName);
+
+  let sequenceFibo = caughtPokeByName.map((x) =>
+    Number(x.nickname.split("-")[1])
+  );
+  sequenceFibo = _.sortBy(sequenceFibo);
+
+  const findMissing = () => {
+    for (let i = 0; i < sequenceFiboByName.length; i++) {
+      console.log("test 1");
+      if (sequenceFiboByName[i] !== undefined) {
+        console.log("test 2");
+        if (sequenceFiboByName[i] !== sequenceFibo[i]) {
+          console.log("test 3");
+          return sequenceFibo[i];
+        }
+      }
+    }
+  };
+  console.log(findMissing(), "<<findMissing");
 
   let fiboCaughtAsMany = caughtPokeByName.length;
   const actualCaughtAsMany = filteredPokeByName.length;
@@ -62,16 +88,18 @@ const catchPokemonList = async (name) => {
 
   let nickName = "";
 
-  console.log(filteredPokeByName[0].nickname, "filteredPokeByName");
+  console.log(sequenceFibo, "<a sequenceFibo");
+  console.log(sequenceFiboByName, "<<sequenceFiboByName");
 
   if (actualCaughtAsMany === 1) {
     nickName = `${caught.name}-0`;
   } else if (!fiboCaughtAsMany && actualCaughtAsMany <= 1) {
     nickName = caught.name;
   } else {
-    if (!filteredPokeByName[0].nickname.includes(caught)) {
+    if (!filteredPokeByName[0].nickname.includes(caught.name)) {
       fiboCaughtAsMany += 1;
     }
+
     fiboCount = await fibonacci(fiboCaughtAsMany);
     nickName = `${caught.name}-${fiboCount}`;
   }
@@ -92,7 +120,6 @@ const catchPokemonList = async (name) => {
   return { ok: true, message: "Gacha! Your pokemon caught", response };
 };
 
-// TODO : Continue completing the function soon
 const releasePokemonList = async (id) => {
   const randomNumberGenerator = Math.floor(Math.random() * 100);
 
