@@ -1,0 +1,38 @@
+[
+  {
+    "id": 0,
+    "url": "https://pokeapi.co/api/v2/pokemon-form/3/",
+    "name": "venusaur",
+    "nickname": "lucas"
+  },
+  {
+    "id": 2,
+    "url": "https://pokeapi.co/api/v2/pokemon-form/3/",
+    "name": "venusaur",
+    "nickname": "venusaur-8"
+  },
+  {
+    "id": 3,
+    "url": "https://pokeapi.co/api/v2/pokemon-form/3/",
+    "name": "venusaur",
+    "nickname": "venusaur-1"
+  },
+  {
+    "id": 4,
+    "url": "https://pokeapi.co/api/v2/pokemon-form/3/",
+    "name": "venusaur",
+    "nickname": "venusaur-2"
+  },
+  {
+    "id": 5,
+    "url": "https://pokeapi.co/api/v2/pokemon-form/3/",
+    "name": "venusaur",
+    "nickname": "venusaur-3"
+  },
+  {
+    "id": 7,
+    "url": "https://pokeapi.co/api/v2/pokemon-form/3/",
+    "name": "venusaur",
+    "nickname": "venusaur-5"
+  }
+]
