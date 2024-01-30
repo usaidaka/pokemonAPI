@@ -58,6 +58,8 @@ const catchPokemonList = async (name) => {
     (x) => x.nickname.split("-")[1]
   );
 
+  // next iteration for handling missing sequence
+
   sequenceFiboByName = sequenceFiboByName.filter((x) => x !== undefined);
   sequenceFiboByName = sequenceFiboByName.map((x) => Number(x));
   sequenceFiboByName = _.sortBy(sequenceFiboByName);
@@ -80,6 +82,8 @@ const catchPokemonList = async (name) => {
     }
   };
   console.log(findMissing(), "<<findMissing");
+
+  // ====================================== //
 
   let fiboCaughtAsMany = caughtPokeByName.length;
   const actualCaughtAsMany = filteredPokeByName.length;
